@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Slider</title>
+</head>
+<body>
+    <div class="main">
+        <div class="slider">
+            <div class="slide__container">
+                <i class="slide-left fa-solid fa-angle-left"></i>
+                <i class="slide-right fa-solid fa-angle-right"></i>
+                <ul class="slide-dot">
+                    <li class="slide-dot-item active"></li>
+                    <li class="slide-dot-item"></li>
+                    <li class="slide-dot-item"></li>
+                    <li class="slide-dot-item"></li>
+                    <li class="slide-dot-item"></li>
+                </ul>
+
+                <div class="slide-main active">
+                    <div class="slide-img">
+                        <img src="https://bellion.studio/assets/img/naruto.webp" alt="">
+                        <div class="slide-content">
+                            <h3>Uzumaki Naruto</h3>
+                            <span>Nếu cậu không thích số phận của mình, đừng chấp nhận nó. Thay vào đó, hãy dũng cảm thay đổi nó theo ý mình!</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-main">
+                    <div class="slide-img">
+                        <img src="https://bellion.studio/assets/img/kaneki.jpg" alt="">
+                        <div class="slide-content">
+                            <h3>Kaneki Ken</h3>
+                            <span>Muốn thấu hiểu một ai đó thì bạn nên thử đặt mình vào cuộc sống của người đó. Không nên đứng ngoài mà phán xét cuộc sống của họ.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="slide-main">
+                    <div class="slide-img">
+                        <img src="https://bellion.studio/assets/img/kid.jpe" alt="">
+                        <div class="slide-content">
+                            <h3>Kaito Kid</h3>
+                            <span>"Cuộc đời không giống như một quyển sách, đọc phần đầu là đoán được phần cuối. cuộc đời bí ẩn và thú vị hơn nhiều..."</span>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="slide-main">
+                    <div class="slide-img">
+                        <img src="https://bellion.studio/assets/img/oikawa.jpg" alt="">
+                        <div class="slide-content">
+                            <h3>Oikawa Tooru</h3>
+                            <span>Tài năng là thứ tự nở rộ , kỹ năng là thứ phải trụi rèn.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="slide-main">
+                    <div class="slide-img">
+                        <img src="https://bellion.studio/assets/img/uchihaitachi.webp" alt="">
+                        <div class="slide-content">
+                            <h3>Uchiha Itachi</h3>
+                            <span>Đừng đánh giá con người qua vẻ bề ngoài và ý kiến chủ quan của mình !</span>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const $ = document.querySelector.bind(document)
+        const $$ = document.querySelectorAll.bind(document)
+
+        // DOT-SLIDE
+        const dots=$$('.slide-dot-item')
+        const slides=$$('.slide-main')
+        const numberOfSilides = slides.length
+        var slideNumber = 0
+        var slideIndex = 0
+        dots.forEach(function(dot,index){
+            dot.onclick = function(){
+                const slide = slides[index]
+                $('.slide-main.active').classList.remove('active')
+                $('.slide-dot-item.active').classList.remove('active')
+                dot.classList.add('active')
+                slide.classList.add('active')
+            }
+        })
+        // AUTO SLIDE
+        function autoSlide(){
+            setInterval(function(){
+                dots.forEach(function(dot){
+                dot.classList.remove('active')
+                })
+                slides.forEach(function(slide){
+                slide.classList.remove('active')
+                })
+                slideNumber ++
+                
+                if (slideNumber > dots.length-1){
+                    slideNumber =0;
+                }
+                dots[slideNumber].classList.add('active')
+                slides[slideNumber].classList.add('active')
+            },5000)
+        }
+        autoSlide()
+        // NEXT SLIDE
+        const backBtn = $('.slide-left')
+        const nextBtn = $('.slide-right')
+        
+        nextBtn.addEventListener('click', function(){
+            dots.forEach(function(dot){
+                dot.classList.remove('active')
+                })
+                slides.forEach(function(slide){
+                slide.classList.remove('active')
+                })
+                slideNumber ++
+                
+                if (slideNumber > dots.length-1){
+                    slideNumber =0;
+                }
+                dots[slideNumber].classList.add('active')
+                slides[slideNumber].classList.add('active')
+        })
+        // BACK SLIDE
+        backBtn.addEventListener('click', function(){
+            dots.forEach(function(dot){
+                dot.classList.remove('active')
+                })
+                slides.forEach(function(slide){
+                slide.classList.remove('active')
+                })
+                slideNumber --
+    
+                if(slideNumber<0){
+                    slideNumber = dots.length -1
+                }
+                dots[slideNumber].classList.add('active')
+                slides[slideNumber].classList.add('active')
+        })
+    </script>
+</body>
+</html>
